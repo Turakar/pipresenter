@@ -6,4 +6,5 @@ xserver-xorg
 xserver-xorg-core
 xdotool
 unclutter
-
+tslib
+libts-bin
