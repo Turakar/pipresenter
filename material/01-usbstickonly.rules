@@ -1,0 +1,10 @@
+# Only allows non mass storages on USB ports 1.1, 1.2, 1.3 and 1.5 (everything but 1.4 and other hubs)
+
+# Disable everything
+ACTION=="add", SUBSYSTEMS=="usb", RUN+="/bin/sh -c 'for host in /sys/bus/usb/devices/usb*; do echo 0 > $host/authorized_default; done'"
+
+# Enable other ports on hub 1 (integrated)
+ACTION=="add", SUBSYSTEMS=="usb", ATTR{devpath}=="1.[1235]", RUN+="/bin/sh -c 'echo 1 > /sys$DEVPATH/authorized'"
+
+# Enable mass storages
+ACTION=="add", SUBSYSTEMS="block", RUN+="/bin/sh -c 'echo 1 > /sys$DEVPATH/authorized'"
