@@ -47,28 +47,29 @@ PiPresenter is optimized for a resolution of 480x320px.
 9. Calibrate the touchscreen: `sudo TSLIB_FBDEVICE=/dev/fb1 TSLIB_TSDEVICE=/dev/input/touchscreen ts_calibrate`
 (You do not need to calibrate X)
 10. Copy onstick.sh and onstickremove.sh to /root, make them executable and add them to usbmount.
-This goes to `/etc/usbmount/mount.d/00_create_model_symlink` before `exit 0`:
-```
-# OnStick event
-/root/onstick.sh
-```
-And this to `/etc/usbmount/mount.d/00_remove_model_symlink` before `exit 0`:
-```
-# OnStickRemove Event
-/root/onstickremove.sh
-```
-There are examples in `material/`.
+  This goes to `/etc/usbmount/mount.d/00_create_model_symlink` before `exit 0`:
+  ```
+  # OnStick event
+  /root/onstick.sh
+  ```
+  And this to `/etc/usbmount/mount.d/00_remove_model_symlink` before `exit 0`:
+  ```
+  # OnStickRemove Event
+  /root/onstickremove.sh
+  ```
+  There are examples in `material/`.
+
 11. Create user present without a password: 
-```
-sudo adduser present
-sudo passwd -d present
-```
+  ```
+  sudo adduser present
+  sudo passwd -d present
+  ```
 12. Add present to necessary groups: 
-```
-sudo adduser present video
-sudo adduser present users
-sudo adduser present input
-```
+  ```
+  sudo adduser present video
+  sudo adduser present users
+  sudo adduser present input
+  ```
 13. Copy `material/.bashrc` and `material/.xinitrc` to `/home/present` and chown them for pi and make them read-only using chmod.
 14. Setup auto-login: `sudo cp -r material/getty@tty1.service.d /etc/systemd/system/`
 
