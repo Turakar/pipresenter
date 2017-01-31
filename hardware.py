@@ -88,7 +88,7 @@ def open_file(e, state, current_dir):
 def startx(cmd):
     global proc
     write_script(cmd)
-    subprocess.call(["startx"])
+    subprocess.call(["startx", "/opt/pipresenter/work/xstart.sh"])
 
 
 def write_script(cmd):
