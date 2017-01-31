@@ -52,7 +52,7 @@ PiPresenter is optimized for a resolution of 480x320px.
   # OnStick event
   /root/onstick.sh
   ```
-  And this to `/etc/usbmount/mount.d/00_remove_model_symlink` before `exit 0`:
+  And this to `/etc/usbmount/umount.d/00_remove_model_symlink` before `exit 0`:
   ```
   # OnStickRemove Event
   /root/onstickremove.sh
