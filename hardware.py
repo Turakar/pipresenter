@@ -24,6 +24,8 @@ import pygame
 import os
 import threading
 import moodle
+import time
+import stat
 
 USBCONNECT_EVENT = pygame.USEREVENT + 1
 USBDISCONNECT_EVENT = pygame.USEREVENT + 2
@@ -32,10 +34,12 @@ usb_mount = "/media/usb"
 superlevel = "Übergeordneter Ordner"
 supported = ["odp", "ppt", "pptx",
              "pdf", 
-             "jpg", "png", "svg", "gif", "tiff", "xpm", "bmp", "ico", "pcx", "wmf"]
+             "jpg", "png", "svg", "gif", "tiff", "xpm", "bmp", "ico", "pcx", "wmf",
+             "mp4", "h264"]
 workdir = "work/"
 
 proc = None
+showing_video = False
 
 def is_supporting(filename):
     return filename[filename.rfind(".") + 1:] in supported
@@ -51,6 +55,8 @@ def open_file_async(e, state, current_dir):
 
 
 def open_file(e, state, current_dir):
+    global showing_video
+    showing_video = False
     path = None
     if state == "usb":
         path = usb_mount + "/" + current_dir + e
@@ -83,23 +89,42 @@ def open_file(e, state, current_dir):
             f.write(e_path + "\n")
         f.close()
         startx("qiv --maxpect --scale_down --fullscreen --slide --delay 360000 --no_sort --no_statusbar --file " + workdir + "qivlist.txt")
+    elif extension in ["mp4", "h264"]:
+        showing_video = True
+        thread = threading.Thread(target=pipe_later)
+        thread.start()
+        startx("omxplayer \"" + path + "\" < /tmp/keyboarder")
+
+
+def pipe_later():
+    time.sleep(2)
+    press_key("a") # harmles key ;)
 
 
 def startx(cmd):
     global proc
     write_script(cmd)
-    subprocess.call(["startx", "/opt/pipresenter/work/xstart.sh"])
+    subprocess.call(["startx", "/usr/bin/xterm", "-e", "/opt/pipresenter/work/xstart.sh"])
 
 
 def write_script(cmd):
     f = open(workdir + "xstart.sh", "w")
     f.write("#!/bin/bash\n")
     f.write("unclutter -idle 1 &\n")
-    f.write("/opt/pipresenter/keyboarder.sh &\n")
+    if showing_video:
+        f.write("mkfifo /tmp/keyboarder\n")
+    else:
+        f.write("/opt/pipresenter/keyboarder.sh &\n")
     f.write(cmd)
     f.write("\n")
+    if showing_video:
+        f.write("rm /tmp/keyboarder\n")
     f.close()
     subprocess.call(["chmod", "+x", "work/xstart.sh"])
+
+
+def is_pipe(path):
+    return stat.S_ISFIFO(os.stat(path).st_mode)
 
 
 def on_sigusr1(signum, frame):
@@ -146,10 +171,10 @@ def list(directory=""):
 
 
 def press_key(key):
-    global proc
     pipe = open("/tmp/keyboarder", "w")
     pipe.write(key)
-    pipe.write("\n")
+    if not showing_video:
+        pipe.write("\n")
     pipe.close()
 
 
