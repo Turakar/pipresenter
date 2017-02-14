@@ -73,6 +73,6 @@ PiPresenter is optimized for a resolution of 480x320px.
   sudo adduser present audio
   ```
   
-13. Copy `material/.bashrc` and `material/.xinitrc` to `/home/present` and chown them for pi and make them read-only using chmod.
+13. Copy `material/.bashrc` to `/home/present` and do `sudo chattr +i /home/present/.bashrc`
 14. Setup auto-login: `sudo cp -r material/getty@tty1.service.d /etc/systemd/system/`
 
