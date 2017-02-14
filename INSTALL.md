@@ -70,6 +70,7 @@ PiPresenter is optimized for a resolution of 480x320px.
   sudo adduser present video
   sudo adduser present users
   sudo adduser present input
+  sudo adduser present audio
   ```
   
 13. Copy `material/.bashrc` and `material/.xinitrc` to `/home/present` and chown them for pi and make them read-only using chmod.
