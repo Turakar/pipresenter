@@ -39,7 +39,7 @@ PiPresenter is optimized for a resolution of 480x320px.
 1. Install git: `sudo apt-get install git`
 2. Clone the source to `/opt/pipresenter`.
 3. Own that folder as user pi.
-4. Create folder `work` and do `chmod 777 work`.
+4. cd into the cloned folder and create folder `work` and do `chmod 777 work`.
 5. `sudo apt-get update`, install packages from `material/packages`
 6. You have to downgrade libsdl because the jessie version is bugged. Use `material/usewheezysdl.sh` for that.
 7. Install the udev rules. They symlink the touchscreen to `/dev/input/touchscreen` and block all but mass storages on usb port 1.4 (if you look onto the LAN and USB ports, it is the top right one): `sudo cp /opt/pipresenter/material/01-pipresenter.rules /etc/udev/rules.d/`
