@@ -29,7 +29,7 @@ sudo dd if=YYYY-MM-DD-raspbian-jessie-lite.img of=/dev/sdc
 
 ## Internet Access
 Setup your internet access.
-There are a lot of tutorials (e.g. [https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md](the official one)) out there, so I won't do another one.
+There are a lot of tutorials (e.g. [the official one](https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md)) out there, so I won't do another one.
 
 ## Touchscreen
 In case of the Kuman touchscreen, it's just a matter of following the instructions on the CD.
