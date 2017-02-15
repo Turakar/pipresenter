@@ -1,5 +1,7 @@
 # PiPresenter
 
+<img alt="PiPresenter Logo" src="https://raw.githubusercontent.com/Turakar/pipresenter/master/material/logo.png" width="600">
+
 ## Overview
 The PiPresenter is a mod for your Pi which adds the ability to easily show presentations from your USB-stick or your Moodle account.
 The UI is displayed on a touchscreen (I've used the [https://www.amazon.de/Kuman-Resolution-Display-Protective-Raspberry/dp/B01FX7909Q](Kuman 3.5" resistive touchscreen "Amazon")) by a python program.
