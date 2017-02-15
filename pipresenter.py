@@ -45,17 +45,22 @@ pygame.mouse.set_visible(False)
 # Design
 default_entries = ["Bitte USB-Stick einstecken"]
 
-background_color = (250, 250, 250)
-text_color = (10, 10, 10)
-seperator_color = (200, 200, 200)
-button_color = (120, 120, 120)
-button_border_color = (10, 10, 10)
+primary_color = (59, 78, 223)
+background_color = (247, 251, 254)
+seperator_color = (230, 233, 255)
+#button_color = (235, 243, 255)
+button_color = background_color
+button_border_color = (59, 78, 223)
+text_color = (60, 60, 60)
+title_color = seperator_color
 
 font_big = pygame.font.Font(None, 36)
 font_small = pygame.font.Font(None, 24)
 
 margin_top = 5
-list_margin_top = margin_top + 45
+banner_height = margin_top + 40
+list_margin_top = banner_height + 10
+button_margin_top = banner_height + 20
 margin = 20
 entry_size = 30
 entry_margin = 3
@@ -78,6 +83,8 @@ background = pygame.Surface(screen.get_size())
 background = background.convert()
 background.fill(background_color)
 
+banner_rect = pygame.Rect(0, 0, width, banner_height)
+
 # General
 home_button_rect = pygame.Rect(width - home_button_size, 0, home_button_size, home_button_size)
 img_home = pygame.image.load(imgsdir + 'home.png')
@@ -85,51 +92,52 @@ img_home_pos = img_home.get_rect()
 img_home_pos.centerx = home_button_rect.centerx
 img_home_pos.centery = home_button_rect.centery
 
+
 # Welcome Screen
-text_welcome = font_big.render('PiPresenter (T. Hoffbauer)', 1, text_color)
+text_welcome = font_big.render('PiPresenter (T. Hoffbauer)', 1, title_color)
 text_welcome_pos = text_welcome.get_rect()
 text_welcome_pos.x = margin
 text_welcome_pos.y = margin_top
 
-usb_button_rect = pygame.Rect(margin, list_margin_top, control_button_size, control_button_size)
+usb_button_rect = pygame.Rect(margin, button_margin_top, control_button_size, control_button_size)
 img_usb = pygame.image.load(imgsdir + 'usb.png')
 img_usb_pos = img_usb.get_rect()
 img_usb_pos.centerx = usb_button_rect.centerx
 img_usb_pos.centery = usb_button_rect.centery
 
-moodle_button_rect = pygame.Rect(margin + control_button_size + button_margin, list_margin_top, control_button_size, control_button_size)
+moodle_button_rect = pygame.Rect(margin + control_button_size + button_margin, button_margin_top, control_button_size, control_button_size)
 img_moodle = pygame.image.load(imgsdir + 'moodle.png')
 img_moodle_pos = img_moodle.get_rect()
 img_moodle_pos.centerx = moodle_button_rect.centerx
 img_moodle_pos.centery = moodle_button_rect.centery
 
 shutdown_button_rect = pygame.Rect(margin + control_button_size * 2 + button_margin * 2, 
-                                 list_margin_top, control_button_size, control_button_size)
+                                 button_margin_top, control_button_size, control_button_size)
 img_shutdown = pygame.image.load(imgsdir + 'shutdown.png')
 img_shutdown_pos = img_shutdown.get_rect()
 img_shutdown_pos.centerx = shutdown_button_rect.centerx
 img_shutdown_pos.centery = shutdown_button_rect.centery
 
 # Moodle login
-text_moodle_login = font_big.render('Moodle Login', 1, text_color)
+text_moodle_login = font_big.render('Moodle Login', 1, title_color)
 text_moodle_login_pos = text_moodle_login.get_rect()
 text_moodle_login_pos.x = margin
 text_moodle_login_pos.y = margin_top
 
-username_button_rect = pygame.Rect(margin, list_margin_top, control_button_size, control_button_size)
+username_button_rect = pygame.Rect(margin, button_margin_top, control_button_size, control_button_size)
 text_username = font_small.render('Name', 1, text_color)
 text_username_pos = text_username.get_rect()
 text_username_pos.centerx = username_button_rect.centerx
 text_username_pos.centery = username_button_rect.centery
 
-password_button_rect = pygame.Rect(margin + control_button_size + button_margin, list_margin_top, control_button_size, control_button_size)
+password_button_rect = pygame.Rect(margin + control_button_size + button_margin, button_margin_top, control_button_size, control_button_size)
 text_password = font_small.render('Passwort', 1, text_color)
 text_password_pos = text_password.get_rect()
 text_password_pos.centerx = password_button_rect.centerx
 text_password_pos.centery = password_button_rect.centery
 
 login_button_rect = pygame.Rect(margin + control_button_size * 2 + button_margin * 2, 
-                                 list_margin_top, control_button_size, control_button_size)
+                                 button_margin_top, control_button_size, control_button_size)
 text_login = font_small.render('Login', 1, text_color)
 text_login_pos = text_login.get_rect()
 text_login_pos.centerx = login_button_rect.centerx
@@ -142,7 +150,7 @@ text_error_pos.y = password_button_rect.y + password_button_rect.height + error_
 
 
 # List View
-text_plsselect = font_big.render('Wählen Sie ihre Datei aus:', 1, text_color)
+text_plsselect = font_big.render('Wählen Sie ihre Datei aus:', 1, title_color)
 text_plsselect_pos = text_plsselect.get_rect()
 text_plsselect_pos.x = margin
 text_plsselect_pos.y = margin_top
@@ -162,25 +170,25 @@ bottom_button_rect = pygame.Rect(list_left + list_width, list_top + list_height 
                                  scroll_button_width, list_height / 2)
 
 # Presentation Overlay
-text_presentation = font_big.render('Präsentationsmodus', 1, text_color)
+text_presentation = font_big.render('Präsentationsmodus', 1, title_color)
 text_presentation_pos = text_presentation.get_rect()
 text_presentation_pos.x = margin
 text_presentation_pos.y = margin_top
 
-left_button_rect = pygame.Rect(margin, list_margin_top, control_button_size, control_button_size)
+left_button_rect = pygame.Rect(margin, button_margin_top, control_button_size, control_button_size)
 img_arrow_left = pygame.image.load(imgsdir + 'arrowleft.png')
 img_arrow_left_pos = img_arrow_left.get_rect()
 img_arrow_left_pos.centerx = left_button_rect.centerx
 img_arrow_left_pos.centery = left_button_rect.centery
 
-right_button_rect = pygame.Rect(margin + control_button_size + button_margin, list_margin_top, control_button_size, control_button_size)
+right_button_rect = pygame.Rect(margin + control_button_size + button_margin, button_margin_top, control_button_size, control_button_size)
 img_arrow_right = pygame.image.load(imgsdir + 'arrowright.png')
 img_arrow_right_pos = img_arrow_right.get_rect()
 img_arrow_right_pos.centerx = right_button_rect.centerx
 img_arrow_right_pos.centery = right_button_rect.centery
 
 escape_button_rect = pygame.Rect(margin + control_button_size * 2 + button_margin * 2, 
-                                 list_margin_top, control_button_size, control_button_size)
+                                 button_margin_top, control_button_size, control_button_size)
 img_escape = pygame.image.load(imgsdir + 'escape.png')
 img_escape_pos = img_escape.get_rect()
 img_escape_pos.centerx = escape_button_rect.centerx
@@ -239,7 +247,7 @@ def draw():
 
 def draw_button(rect):
     pygame.draw.rect(background, button_color, rect)
-    pygame.draw.rect(background, button_border_color, rect, 1)
+    pygame.draw.rect(background, button_border_color, rect, 3)
 
 
 def draw_button_content(rect, content, content_pos):
@@ -247,8 +255,13 @@ def draw_button_content(rect, content, content_pos):
     background.blit(content, content_pos)
 
 
+def draw_home_button():
+    background.blit(img_home, img_home_pos)
+
+
 def draw_welcome():
     # Title
+    pygame.draw.rect(background, primary_color, banner_rect)
     background.blit(text_welcome, text_welcome_pos)
     
     # Buttons
@@ -259,6 +272,7 @@ def draw_welcome():
 
 def draw_moodle_login():
     # Title
+    pygame.draw.rect(background, primary_color, banner_rect)
     background.blit(text_moodle_login, text_moodle_login_pos)
     
     # Buttons
@@ -271,16 +285,16 @@ def draw_moodle_login():
         background.blit(text_error, text_error_pos)
     
     # Home button
-    draw_button_content(home_button_rect, img_home, img_home_pos)
+    draw_home_button()
 
 
 def draw_list():
+    
+    # Title
+    pygame.draw.rect(background, primary_color, banner_rect)
     background.blit(text_plsselect, text_plsselect_pos)
 
     # List
-    pygame.draw.rect(background, seperator_color,
-                     pygame.Rect(list_left, list_top, list_width, list_height),
-                     1)
     for i, entry in enumerate(entries):
         if i < scroll:
             continue
@@ -308,16 +322,21 @@ def draw_list():
                          (list_left, list_top + (offset + 1) * entry_size),
                          (list_left + list_width, list_top + (offset + 1) * entry_size))
 
+    pygame.draw.rect(background, primary_color,
+                     pygame.Rect(list_left, list_top, list_width, list_height),
+                     3)
+    
     # Scroll Buttons
     draw_button_content(top_button_rect, img_arrow_up, img_arrow_up_pos)
     draw_button_content(bottom_button_rect, img_arrow_down, img_arrow_down_pos)
     
     # Home button
-    draw_button_content(home_button_rect, img_home, img_home_pos)
+    draw_home_button()
 
 
 def draw_presentation():
     # Title
+    pygame.draw.rect(background, primary_color, banner_rect)
     background.blit(text_presentation, text_presentation_pos)
     
     # Buttons
@@ -414,9 +433,12 @@ def on_touch_presentation(x, y):
     if left_button_rect.collidepoint(x, y):
         hardware.press_key("Page_Up")
     elif right_button_rect.collidepoint(x, y):
-        hardware.press_key("Page_Down")
+            hardware.press_key("Page_Down")
     elif escape_button_rect.collidepoint(x, y):
-        hardware.press_key("Escape")
+        if hardware.showing_video:
+            hardware.press_key("q")
+        else:
+            hardware.press_key("Escape")
     
 
 def on_stick_connect():

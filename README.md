@@ -6,10 +6,6 @@ The UI is displayed on a touchscreen (I've used the [https://www.amazon.de/Kuman
 This project is aimed for schools, but might be used in other areas like universities or companies, too.
 The PiPresenter is a project for "Jugend Forscht", a german science competition.
 
-*In my testing environment I'm using non-free icons.
-Therefore I will wait until a friend of mine desings me some new icons Icons I can use.
-Unfortunately you will have to wait for now.*
-
 ## Installation
 Have a look at INSTALL.md.
 I will probably make this installation easier in the future by providing a custom image.

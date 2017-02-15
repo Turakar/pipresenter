@@ -29,7 +29,7 @@ sudo dd if=YYYY-MM-DD-raspbian-jessie-lite.img of=/dev/sdc
 
 ## Internet Access
 Setup your internet access.
-There are a lot of tutorials (e.g. [https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md](the official one)) out there, so I won't do another one.
+There are a lot of tutorials (e.g. [the official one](https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md)) out there, so I won't do another one.
 
 ## Touchscreen
 In case of the Kuman touchscreen, it's just a matter of following the instructions on the CD.
@@ -39,7 +39,7 @@ PiPresenter is optimized for a resolution of 480x320px.
 1. Install git: `sudo apt-get install git`
 2. Clone the source to `/opt/pipresenter`.
 3. Own that folder as user pi.
-4. Create folder `work` and do `chmod 777 work`.
+4. cd into the cloned folder and create folder `work` and do `chmod 777 work`.
 5. `sudo apt-get update`, install packages from `material/packages`
 6. You have to downgrade libsdl because the jessie version is bugged. Use `material/usewheezysdl.sh` for that.
 7. Install the udev rules. They symlink the touchscreen to `/dev/input/touchscreen` and block all but mass storages on usb port 1.4 (if you look onto the LAN and USB ports, it is the top right one): `sudo cp /opt/pipresenter/material/01-pipresenter.rules /etc/udev/rules.d/`
@@ -70,8 +70,9 @@ PiPresenter is optimized for a resolution of 480x320px.
   sudo adduser present video
   sudo adduser present users
   sudo adduser present input
+  sudo adduser present audio
   ```
   
-13. Copy `material/.bashrc` and `material/.xinitrc` to `/home/present` and chown them for pi and make them read-only using chmod.
+13. Copy `material/.bashrc` to `/home/present` and do `sudo chattr +i /home/present/.bashrc`
 14. Setup auto-login: `sudo cp -r material/getty@tty1.service.d /etc/systemd/system/`
 
