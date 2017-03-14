@@ -102,7 +102,6 @@ def pipe_later():
 
 
 def startx(cmd):
-    global proc
     write_script(cmd)
     subprocess.call(["startx", "/usr/bin/xterm", "-e", "/opt/pipresenter/work/xstart.sh"])
 
@@ -111,6 +110,7 @@ def write_script(cmd):
     f = open(workdir + "xstart.sh", "w")
     f.write("#!/bin/bash\n")
     f.write("unclutter -idle 1 &\n")
+    f.write("pkill keyboarder.sh\n")
     if showing_video:
         f.write("mkfifo /tmp/keyboarder\n")
     else:
