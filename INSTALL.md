@@ -64,3 +64,4 @@ PiPresenter is optimized for a resolution of 480x320px.
 13. Copy `material/.bashrc` to `/home/present` and do `sudo chattr +i /home/present/.bashrc`
 14. Setup auto-login: `sudo cp -r material/getty@tty1.service.d /etc/systemd/system/`
 15. As root: Create folder `/media/usb` and execute `chmod 777 /media/usb`
+16. Copy `material/99-disabletouch.conf` to `/etc/X11/xorg.conf.d/`
