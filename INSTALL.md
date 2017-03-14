@@ -42,23 +42,11 @@ PiPresenter is optimized for a resolution of 480x320px.
 4. cd into the cloned folder and create folder `work` and do `chmod 777 work`.
 5. `sudo apt-get update`, install packages from `material/packages`
 6. You have to downgrade libsdl because the jessie version is bugged. Use `material/usewheezysdl.sh` for that.
-7. Install the udev rules. They symlink the touchscreen to `/dev/input/touchscreen` and block all but mass storages on usb port 1.4 (if you look onto the LAN and USB ports, it is the top right one): `sudo cp /opt/pipresenter/material/01-pipresenter.rules /etc/udev/rules.d/`
+7. Install the udev rules. They symlink the touchscreen to `/dev/input/touchscreen` and block all but mass storages on usb port 1.4 (if you look onto the LAN and USB ports, it is the top right one): `sudo cp /opt/pipresenter/material/50-pipresenter.rules /etc/udev/rules.d/`
 8. Reboot
 9. Calibrate the touchscreen: `sudo TSLIB_FBDEVICE=/dev/fb1 TSLIB_TSDEVICE=/dev/input/touchscreen ts_calibrate`
 (You do not need to calibrate X)
-10. Copy onstick.sh and onstickremove.sh to /root, make them executable and add them to usbmount.
-  This goes to `/etc/usbmount/mount.d/00_create_model_symlink` before `exit 0`:
-  ```
-  # OnStick event
-  /root/onstick.sh
-  ```
-  And this to `/etc/usbmount/umount.d/00_remove_model_symlink` before `exit 0`:
-  ```
-  # OnStickRemove Event
-  /root/onstickremove.sh
-  ```
-  There are examples in `material/`.
-
+10. Copy onstick.sh and onstickremove.sh to /root and make them executable.
 11. Create user present without a password: 
   ```
   sudo adduser present
@@ -75,4 +63,4 @@ PiPresenter is optimized for a resolution of 480x320px.
   
 13. Copy `material/.bashrc` to `/home/present` and do `sudo chattr +i /home/present/.bashrc`
 14. Setup auto-login: `sudo cp -r material/getty@tty1.service.d /etc/systemd/system/`
-
+15. As root: Create folder `/media/usb` and execute `chmod 777 /media/usb`
