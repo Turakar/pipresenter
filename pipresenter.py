@@ -54,17 +54,17 @@ button_border_color = (59, 78, 223)
 text_color = (60, 60, 60)
 title_color = seperator_color
 
-font_big = pygame.font.Font(None, 36)
-font_small = pygame.font.Font(None, 24)
+font_big = pygame.font.Font(None, 38)
+font_small = pygame.font.Font(None, 27)
 
 margin_top = 5
 banner_height = margin_top + 40
 list_margin_top = banner_height + 10
 button_margin_top = banner_height + 20
 margin = 20
-entry_size = 30
+entry_size = 33
 entry_margin = 3
-scroll_button_width = 30
+scroll_button_width = 45
 control_button_size = 140
 button_margin = 10
 home_button_size = 37
