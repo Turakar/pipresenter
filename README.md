@@ -33,7 +33,7 @@ The python program also manages the X Server and the presentation program (e.g. 
 The program is splitted into the three parts pipresenter.py (controlling and drawing the UI), hardware.py (interaction with the OS and other programs) and moodle.py (Moodle client).
 
 ## Installation
-Have a look at INSTALL.md.
+Have a look at the [installation instructions](INSTALL.md).
 I will probably make this installation easier in the future by providing a custom image.
 
 ## Known Problem with the touchscreen
