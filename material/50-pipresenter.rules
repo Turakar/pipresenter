@@ -8,7 +8,7 @@ ACTION=="add", SUBSYSTEMS=="usb", DRIVER=="usbhid", ATTRS{devpath}=="1.4", RUN+=
 KERNEL!="sd[a-z][0-9]", GOTO="mnt_auto_mount_end"
 
 ACTION=="add", ENV{mount_options}="relatime,ro,nodev,noexec,nosuid,utf8"
-#ACTION=="add", ENV{ID_FS_TYPE}=="vfat|ntfs", ENV{mount_options}="$env{mount_options},utf8,gid=100,umask=002"
+ACTION=="add", ENV{ID_FS_TYPE}=="vfat|ntfs", ENV{mount_options}="$env{mount_options},gid=100,umask=002"
 
 ACTION=="add", RUN+="/bin/mount -o $env{mount_options} /dev/%k /media/usb", RUN+="/root/onstick.sh"
 ACTION=="remove", RUN+="/root/onstickremove.sh"
