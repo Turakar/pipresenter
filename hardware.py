@@ -37,9 +37,11 @@ supported = ["odp", "ppt", "pptx",
              "jpg", "png", "svg", "gif", "tiff", "xpm", "bmp", "ico", "pcx", "wmf",
              "mp4", "h264"]
 workdir = "work/"
+ping_port = "21"
 
 proc = None
 showing_video = False
+running = True
 
 def is_supporting(filename):
     return filename[filename.rfind(".") + 1:] in supported
@@ -136,6 +138,13 @@ def on_sigusr2(signum, frame):
 
 
 def init():
+    global ping_thread
+    # Configure ping port
+    os.system("echo " + ping_port + " > /sys/class/gpio/export")
+    time.sleep(0.1)
+    os.system("echo out > /sys/class/gpio/gpio" + ping_port + "/direction")
+    ping_thread = threading.Thread(target=ping)
+    ping_thread.start()
     # Register signal listeners
     signal.signal(signal.SIGUSR1, on_sigusr1)
     signal.signal(signal.SIGUSR2, on_sigusr2)
@@ -143,6 +152,14 @@ def init():
     f = open(workdir + "pid", "w")
     f.write(str(os.getpid()))
     f.close()
+
+
+def ping():
+    while running:
+        os.system("echo 1 > /sys/class/gpio/gpio" + ping_port + "/value")
+        time.sleep(1)
+        os.system("echo 0 > /sys/class/gpio/gpio" + ping_port + "/value")
+        time.sleep(4)
 
 
 def list(directory=""):
@@ -179,4 +196,6 @@ def press_key(key):
 
 
 def shutdown():
+    global running
+    running = False
     subprocess.call(["systemctl", "poweroff", "-i"])

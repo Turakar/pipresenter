@@ -59,6 +59,7 @@ PiPresenter is optimized for a resolution of 480x320px.
   sudo adduser present users
   sudo adduser present input
   sudo adduser present audio
+  sudo adduser present gpio
   ```
   
 13. Copy `material/.bashrc` to `/home/present` and do `sudo chattr +i /home/present/.bashrc`
